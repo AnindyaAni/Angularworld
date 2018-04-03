@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap/mybootstrap/dist/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>
+            var app = angular.module("myApp" ,[])
+                             .controller("myController" ,function($scope){
+                                 
+                                 $scope.deletData = function(index){
+                                     
+                                     console.log("The index is ", index)
+                                     $scope.doctor.splice(index, 1)
+                                 }
+                                 
+                                 $scope.addData = function(){
+                           
+                                   $scope.doctor.push($scope.doctors)
+                                   $scope.doctors = {};
+                                 }
+                                 
+                                 $scope.doctor = [
+                                     
+                                       {name:"Dr Batra" , image:"images/d1.jpg", age:50 ,salary:123000, specialization:"Hair Specialist", contact:6574588343, email:'batra@gmail.com'},
+                                     
+                                       {name:"Dr Mathoor", image:"images/d2.jpg" , age:40 ,salary:263000, specialization:"Dentist", contact:7623456787, email:'mathoor@gmail.com'},
+                                     
+                                       {name:"Dr. Reid B. Adams", image:"images/d3.jpg" , age:30 ,salary:323000, specialization:"surgical oncology", contact:9875442341, email:'reid@gmail.com'}
+                                  ];
+                       
+                        });
+        </script>
+    </head>
+    
+    <body ng-app="myApp" ng-controller="myController">
+        <div class="well text-center">
+            <form class="form-inline">
+                <div class="form-group">
+                  <label>Name:</label>
+                  <input class="form-control" placeholder="Enter Name" ng-model="doctors.name">
+                  <br><br>    
+                  <label>Age:</label>
+                  <input class="form-control" placeholder="Enter Age">
+                </div>
+                
+                <div class="form-group">
+                  <label>Salary:</label>
+                  <input class="form-control" placeholder="Enter Salary">
+                  <br><br>    
+                  <label>Specialization:</label>
+                  <input class="form-control" placeholder="Enter specialization">
+                </div>
+                
+                <div class="form-group">
+                  <label>contact:</label>
+                  <input class="form-control" placeholder="Enter Contact">
+                  <br><br>    
+                  <label>email:</label>
+                  <input class="form-control" placeholder="Enter Email">
+                </div>
+                
+                
+                
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button ng-click="addData()" class="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Sl No</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Age</th>
+                <th>Salary</th>
+                <th>Specialization</th>
+                <th>contact</th>
+                <th>email</th>
+                <th>Action</th>
+            </tr>
+            
+            <tr ng-repeat="x in doctor">
+                <td>{{$index}}</td>
+                <td>{{x.name}}</td>
+                <td><img ng-src='{{x.image}}' height="100px" width="150px"></td>
+                <td>{{x.age}}</td>
+                <td>{{x.salary}}</td>
+                <td>{{x.specialization}}</td>
+                <td>{{x.contact}}</td>
+                <td>{{x.email}}</td>
+                <td><button ng-click='deletData($index)'>Delete</button></td>
+            </tr>
+        </table>
+    </body>
+</html>
